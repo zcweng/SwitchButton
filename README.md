@@ -22,10 +22,20 @@
         <attr name="sb_background" format="reference|color"/>           背景色，默认白色
         <attr name="sb_enable_effect" format="reference|boolean"/>      是否启用特效，默认true
         
+	
+	
+	SwitchButton switchButton = (SwitchButton) findViewById(R.id.switch_button);
+	switchButton.setChecked(true);
+	switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+			//TODO do your job
+		}
+	});
         //禁用按钮
 	switchButton.setEnabled(false);
 ``` 
 
 
-<img src="21879.gif" style="width:212px;height:182px;" />
-<img src="device-capture.png" style="width:480px;height:auto;" />
+<img src="21879.gif" style="max-width:212px;height:182px;" />
+<img src="device-capture.png" style="max-width:480px;height:auto;" />
