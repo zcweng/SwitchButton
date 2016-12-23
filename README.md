@@ -21,4 +21,11 @@
         <attr name="sb_show_indicator" format="reference|boolean"/>     是否显示指示器，默认true：显示
         <attr name="sb_background" format="reference|color"/>           背景色，默认白色
         <attr name="sb_enable_effect" format="reference|boolean"/>      是否启用特效，默认true
+        
+        //禁用按钮
+	switchButton.setEnabled(false);
 ``` 
+
+
+<img src="21879.gif" style="width:212px;height:182px;" />
+<img src="device-capture.png" style="width:480px;height:auto;" />
