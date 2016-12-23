@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="#fff"
+              android:orientation="vertical"
+              android:padding="20dp">
+
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+    <com.suke.widget.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_checked="true"/>
+
+
+    <com.suke.widget.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_show_indicator="false"
+        app:sb_checked="true"/>
+
+    <com.suke.widget.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_checked_color="#fdc951"
+        app:sb_checked="true"/>
+
+    <com.suke.widget.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_button_color="#db99c7"
+        app:sb_shadow_color="#A36F95"
+        app:sb_background="#FFF"
+        app:sb_checkline_color="#a5dc88"
+        app:sb_checked_color="#A36F95"
+        app:sb_uncheckcircle_color="#A36F95"
+        />
+
+    <com.suke.widget.SwitchButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:sb_enable_effect="false"/>
+
+</LinearLayout>
