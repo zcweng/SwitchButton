@@ -1,9 +1,50 @@
 # SwitchButton
-SwitchButton.具有与IOS开关控件相似样式和行为的Android控件,minSdkVersion>=11<br>
+SwitchButton.An *beautiful+lightweight+custom-style-easy* switch widget for Android,minSdkVersion >= 11<br>
 ![](21879.gif)
 
-使用方法
+UseAge
 -------
+```grovvy
+compile 'com.github.zcweng:switch-button:0.0.1-SNAPSHOT@aar'
+```
+
+layout.xml:
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical">
+
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+```
+
+Activity.java:
+```java
+	com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
+	    findViewById(R.id.switch_button);
+	switchButton.setChecked(true);
+	switchButton.isChecked();
+	switchButton.toggle();     //切换开关
+	switchButton.toggle(false);//无动画切换
+	//禁用按钮
+	switchButton.setEnabled(false);
+
+	switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+			//TODO do your job
+		}
+	});
+
+```
+
+More Style:
 ```xml
     <attr name="sb_shadow_radius" format="reference|dimension"/>       阴影半径
     <attr name="sb_shadow_offset" format="reference|dimension"/>       阴影偏移
@@ -25,25 +66,6 @@ SwitchButton.具有与IOS开关控件相似样式和行为的Android控件,minSd
     <attr name="sb_enable_effect" format="reference|boolean"/>         是否启用特效，默认true
 ```
 
-```java
-	com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
-	    findViewById(R.id.switch_button);
-	switchButton.setChecked(true);
-	switchButton.isChecked();
-	switchButton.toggle();     //切换开关
-	switchButton.toggle(false);//无动画切换
-	//禁用按钮
-	switchButton.setEnabled(false);
-
-	switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-		@Override
-		public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-			//TODO do your job
-		}
-	});
-
-``` 
-
 
 ScreenShot
 -------
@@ -51,13 +73,6 @@ ScreenShot
 ![](http://qr.api.cli.im/qr?data=https%253A%252F%252Fgithub.com%252Fzcweng%252FSwitchButton%252Fblob%252Fmaster%252Fsample%252Fsample-debug.apk&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=8144f9f150d38d7d364c923d0b9c87cf)<br>
 ![](device-capture.png)
 
-
-
-Gradle
--------
-```grovvy
-compile 'com.github.zcweng:switch-button:0.0.1-SNAPSHOT@aar'
-```
 
 License
 -------
