@@ -24,7 +24,7 @@ SwitchButton.具有与IOS开关控件相似样式和行为的Android控件
     <attr name="sb_enable_effect" format="reference|boolean"/>         是否启用特效，默认true
 
 
-	SwitchButton switchButton = (SwitchButton) findViewById(R.id.switch_button);
+	com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton) findViewById(R.id.switch_button);
 	switchButton.setChecked(true);
 	switchButton.isChecked();
 	switchButton.toggle();     //切换开关
@@ -47,6 +47,11 @@ SwitchButton.具有与IOS开关控件相似样式和行为的Android控件
 
 
 
+Gradle
+-------
+```
+compile 'com.github.zcweng:switch-button:0.0.1-SNAPSHOT@aar'
+```
 
 License
 -------
