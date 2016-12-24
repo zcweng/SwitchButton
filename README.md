@@ -2,6 +2,8 @@
 SwitchButton.具有与IOS开关控件相似样式和行为的Android控件,minSdkVersion>=11<br>
 ![](21879.gif)
 
+![](http://qr.api.cli.im/qr?data=https%253A%252F%252Fgithub.com%252Fzcweng%252FSwitchButton%252Fblob%252Fmaster%252Fsample%252Fsample-debug.apk&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=8144f9f150d38d7d364c923d0b9c87cf)
+
 使用方法
 -------
 ```xml
