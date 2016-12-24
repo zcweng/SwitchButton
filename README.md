@@ -1,10 +1,10 @@
 # SwitchButton
-SwitchButton.具有与IOS开关控件相似样式和行为的Android控件\<br>
-<img src="21879.gif" style="max-width:212px;height:182px;" />
+        SwitchButton.具有与IOS开关控件相似样式和行为的Android控件<br>
+        <img src="21879.gif" style="max-width:212px;height:182px;" />
 
 使用方法
 -------
-```
+```xml
     <attr name="sb_shadow_radius" format="reference|dimension"/>       阴影半径
     <attr name="sb_shadow_offset" format="reference|dimension"/>       阴影偏移
     <attr name="sb_shadow_color" format="reference|color"/>            阴影颜色
@@ -23,8 +23,9 @@ SwitchButton.具有与IOS开关控件相似样式和行为的Android控件\<br>
     <attr name="sb_show_indicator" format="reference|boolean"/>        是否显示指示器，默认true：显示
     <attr name="sb_background" format="reference|color"/>              背景色，默认白色
     <attr name="sb_enable_effect" format="reference|boolean"/>         是否启用特效，默认true
+```
 
-
+```java
 	com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
 	    findViewById(R.id.switch_button);
 	switchButton.setChecked(true);
@@ -51,7 +52,7 @@ SwitchButton.具有与IOS开关控件相似样式和行为的Android控件\<br>
 
 Gradle
 -------
-```
+```grovvy
 compile 'com.github.zcweng:switch-button:0.0.1-SNAPSHOT@aar'
 ```
 
