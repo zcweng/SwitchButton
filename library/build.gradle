@@ -1,4 +1,11 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.novoda.bintray-release'
+
+def MODULE_NAME  = "SwitchButton"
+def VERSION_CODE = 1
+def VERSION_NAME = "0.0.1"
 
 android {
     compileSdkVersion 23
@@ -7,15 +14,121 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 23
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
     }
 
-    sourceSets {
-        main {
-        }
+    lintOptions {
+        abortOnError false
     }
+
 }
 
 dependencies{
 
 }
 
+
+def SITE_URL  = "https://github.com/zcweng/SwitchButton"
+def GIT_URL   = "https://github.com/zcweng/SwitchButton.git"
+def ISSUE_URL = "https://github.com/zcweng/SwitchButton/issues"
+def LICENSE_URL = "https://github.com/zcweng/SwitchButton/LICENSE"
+def DESCRIPTION = "SwitchButton.具有与IOS开关控件相似样式和行为的Android控件"
+group = "com.suke.widget"
+
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//publish {
+//    userOrg = properties.getProperty("bintray.user")
+//    groupId = group
+//    artifactId = MODULE_NAME
+//    publishVersion = VERSION_NAME
+//    desc = DESCRIPTION
+//    website = SITE_URL
+//}
+
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name DESCRIPTION
+                url SITE_URL
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url LICENSE_URL
+                    }
+                }
+                developers {
+                    developer {
+                        id 'suke'
+                        name 'suke'
+                        email 'zhouchangwen@gmail.com'
+                    }
+                }
+                scm {
+                    connection GIT_URL
+                    developerConnection GIT_URL
+                    url SITE_URL
+                }
+            }
+        }
+    }
+}
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def BINTRAY_USER = properties.getProperty("bintray.user")
+def BINTRAY_KEY = properties.getProperty("bintray.apikey")
+
+bintray {
+    user = BINTRAY_USER
+    key = BINTRAY_KEY
+    configurations = ['archives']
+    filesSpec {
+        from 'build/libs'
+        into 'standalone_files/level1'
+    }
+    dryRun = false
+    publish = true
+    override = true
+    pkg {
+        repo = "maven"
+        name = "switch-button"
+        desc = DESCRIPTION
+        websiteUrl = SITE_URL
+        vcsUrl = GIT_URL
+        userOrg = BINTRAY_USER
+        issueTrackerUrl = ISSUE_URL
+        licenses = ["MIT"]
+        labels = ['android']    //标签
+        publish = true
+        publicDownloadNumbers = true
+    }
+    version {
+        name = VERSION_NAME
+        desc = DESCRIPTION
+        released  = new Date()
+        vcsTag = VERSION_NAME
+        attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+    }
+}

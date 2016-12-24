@@ -20,26 +20,6 @@ import android.widget.Checkable;
 
 /**
  * SwitchButton.
- *
- * <attr name="sb_shadow_radius" format="reference|dimension"/>
- * <attr name="sb_shadow_offset" format="reference|dimension"/>
- * <attr name="sb_shadow_color" format="reference|color"/>
- * <attr name="sb_uncheck_color" format="reference|color"/>
- * <attr name="sb_checked_color" format="reference|color"/>
- *
- * <attr name="sb_border_width" format="reference|dimension"/>
- * <attr name="sb_checkline_color" format="reference|color"/>
- * <attr name="sb_checkline_width" format="reference|dimension"/>
- * <attr name="sb_uncheckcircle_color" format="reference|color"/>
- * <attr name="sb_uncheckcircle_width" format="reference|dimension"/>
- * <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>
- *
- * <attr name="sb_checked" format="reference|boolean"/>
- * <attr name="sb_shadow_effect" format="reference|boolean"/>
- * <attr name="sb_effect_duration" format="reference|integer"/>
- * <attr name="sb_button_color" format="reference|color"/>
- * <attr name="sb_show_indicator" format="reference|boolean"/>
- *
  */
 public class SwitchButton extends View implements Checkable {
     private static final int DEFAULT_WIDTH = dp2pxInt(58);
@@ -205,10 +185,8 @@ public class SwitchButton extends View implements Checkable {
         valueAnimator.addUpdateListener(animatorUpdateListener);
         valueAnimator.addListener(animatorListener);
 
-
+        super.setClickable(true);
         super.setPadding(0,0,0,0);
-        super.setOnClickListener(innerOnClickListener);
-        super.setOnLongClickListener(innerOnLongClickListener);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
         }
@@ -229,20 +207,6 @@ public class SwitchButton extends View implements Checkable {
         }
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    class ViewState {
-        float buttonX;
-        int checkStateColor;
-        int checkLineColor;
-        float radius;
-        ViewState(){}
-        private void copy(ViewState source){
-            this.buttonX = source.buttonX;
-            this.checkStateColor = source.checkStateColor;
-            this.checkLineColor = source.checkLineColor;
-            this.radius = source.radius;
-        }
     }
 
     @Override
@@ -281,17 +245,23 @@ public class SwitchButton extends View implements Checkable {
 
     }
 
+    /**
+     * @param viewState
+     */
     private void setUncheckViewState(ViewState viewState){
         viewState.radius = 0;
         viewState.checkStateColor = uncheckColor;
-        viewState.checkLineColor = Color.TRANSPARENT;
+        viewState.checkedLineColor = Color.TRANSPARENT;
         viewState.buttonX = buttonMinX;
     }
 
+    /**
+     * @param viewState
+     */
     private void setCheckedViewState(ViewState viewState){
         viewState.radius = viewRadius;
         viewState.checkStateColor = checkedColor;
-        viewState.checkLineColor = checkLineColor;
+        viewState.checkedLineColor = checkLineColor;
         viewState.buttonX = buttonMaxX;
     }
 
@@ -355,7 +325,7 @@ public class SwitchButton extends View implements Checkable {
      */
     protected void drawCheckedIndicator(Canvas canvas) {
         drawCheckedIndicator(canvas,
-                viewState.checkLineColor,
+                viewState.checkedLineColor,
                 checkLineWidth,
                 left + viewRadius - checkedLineOffsetX, centerY - checkLineLength,
                 left + viewRadius - checkedLineOffsetY, centerY + checkLineLength,
@@ -423,6 +393,16 @@ public class SwitchButton extends View implements Checkable {
         canvas.drawCircle(centerX, centerY, radius, paint);
     }
 
+    /**
+     * @param canvas
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @param startAngle
+     * @param sweepAngle
+     * @param paint
+     */
     private void drawArc(Canvas canvas,
                  float left, float top,
                  float right, float bottom,
@@ -438,6 +418,15 @@ public class SwitchButton extends View implements Checkable {
         }
     }
 
+    /**
+     * @param canvas
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @param backgroundRadius
+     * @param paint
+     */
     private void drawRoundRect(Canvas canvas,
                        float left, float top,
                        float right, float bottom,
@@ -487,6 +476,10 @@ public class SwitchButton extends View implements Checkable {
         toggle(true);
     }
 
+    /**
+     * 切换状态
+     * @param animate
+     */
     public void toggle(boolean animate) {
         if(!isEnabled()){return;}
 
@@ -527,6 +520,9 @@ public class SwitchButton extends View implements Checkable {
         valueAnimator.start();
     }
 
+    /**
+     *
+     */
     private void broadcastEvent() {
         if(onCheckedChangeListener != null){
             isEventBroadcast = true;
@@ -535,6 +531,7 @@ public class SwitchButton extends View implements Checkable {
         isEventBroadcast = false;
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int actionMasked = event.getActionMasked();
@@ -542,12 +539,26 @@ public class SwitchButton extends View implements Checkable {
         switch (actionMasked){
             case MotionEvent.ACTION_DOWN:{
                 isTouchingDown = true;
+                touchDownTime = System.currentTimeMillis();
+                //取消准备进入拖动状态
+                removeCallbacks(postPendingDrag);
+                //预设100ms进入拖动状态
+                postDelayed(postPendingDrag, 100);
                 break;
             }
             case MotionEvent.ACTION_MOVE:{
                 float eventX = event.getX();
-                if(isDragState()){
+                if(isPendingDragState()){
+                    //在准备进入拖动状态过程中，可以拖动按钮位置
+                    float fraction = eventX / getWidth();
+                    fraction = Math.max(0f, Math.min(1f, fraction));
 
+                    viewState.buttonX = buttonMinX
+                            + (buttonMaxX - buttonMinX)
+                            * fraction;
+
+                }else if(isDragState()){
+                    //拖动按钮位置，同时改变对应的背景颜色
                     float fraction = eventX / getWidth();
                     fraction = Math.max(0f, Math.min(1f, fraction));
 
@@ -560,15 +571,21 @@ public class SwitchButton extends View implements Checkable {
                             uncheckColor,
                             checkedColor
                     );
-
                     postInvalidate();
+
                 }
                 break;
             }
-            case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:{
                 isTouchingDown = false;
-                if(isDragState()){
+                //取消准备进入拖动状态
+                removeCallbacks(postPendingDrag);
+
+                if(System.currentTimeMillis() - touchDownTime <= 300){
+                    //点击时间小于300ms，认为是点击操作
+                    toggle();
+                }else if(isDragState()){
+                    //在拖动状态，计算按钮位置，设置是否切换状态
                     float eventX = event.getX();
                     float fraction = eventX / getWidth();
                     fraction = Math.max(0f, Math.min(1f, fraction));
@@ -580,26 +597,57 @@ public class SwitchButton extends View implements Checkable {
                         pendingSettleState();
                     }
                 }else if(isPendingDragState()){
+                    //在准备进入拖动状态过程中，取消之，复位
+                    pendingCancelDragState();
+                }
+                break;
+            }
+            case MotionEvent.ACTION_CANCEL:{
+                isTouchingDown = false;
+
+                removeCallbacks(postPendingDrag);
+
+                if(isPendingDragState()
+                        || isDragState()){
+                    //复位
                     pendingCancelDragState();
                 }
                 break;
             }
         }
-        return super.onTouchEvent(event);
+        return true;
     }
 
 
+    /**
+     * 是否在动画状态
+     * @return
+     */
     private boolean isInAnimating(){
         return animateState != ANIMATE_STATE_NONE;
     }
+
+    /**
+     * 是否在进入拖动或离开拖动状态
+     * @return
+     */
     private boolean isPendingDragState(){
         return animateState == ANIMATE_STATE_PENDING_DRAG
                 || animateState == ANIMATE_STATE_PENDING_RESET;
     }
+
+    /**
+     * 是否在手指拖动状态
+     * @return
+     */
     private boolean isDragState(){
         return animateState == ANIMATE_STATE_DRAGING;
     }
 
+    /**
+     * 设置是否启用阴影效果
+     * @param shadowEffect true.启用
+     */
     public void setShadowEffect(boolean shadowEffect) {
         if(this.shadowEffect == shadowEffect){return;}
         this.shadowEffect = shadowEffect;
@@ -618,7 +666,7 @@ public class SwitchButton extends View implements Checkable {
     }
 
     /**
-     * 80-50
+     * 开始进入拖动状态
      */
     private void pendingDragState() {
         if(isInAnimating()){return;}
@@ -636,7 +684,7 @@ public class SwitchButton extends View implements Checkable {
         if(isChecked()){
             afterState.checkStateColor = checkedColor;
             afterState.buttonX = buttonMaxX;
-            afterState.checkLineColor = checkedColor;
+            afterState.checkedLineColor = checkedColor;
         }else{
             afterState.checkStateColor = uncheckColor;
             afterState.buttonX = buttonMinX;
@@ -647,6 +695,9 @@ public class SwitchButton extends View implements Checkable {
     }
 
 
+    /**
+     * 取消拖动状态
+     */
     private void pendingCancelDragState() {
         if(isDragState() || isPendingDragState()){
             if(valueAnimator.isRunning()){
@@ -666,6 +717,9 @@ public class SwitchButton extends View implements Checkable {
     }
 
 
+    /**
+     * 动画-设置新的状态
+     */
     private void pendingSettleState() {
         if(valueAnimator.isRunning()){
             valueAnimator.cancel();
@@ -684,14 +738,10 @@ public class SwitchButton extends View implements Checkable {
 
 
     @Override
-    public void setOnClickListener(OnClickListener l) {
-        delegateOnClickListener = l;
-    }
+    public final void setOnClickListener(OnClickListener l) {}
 
     @Override
-    public void setOnLongClickListener(OnLongClickListener l) {
-        delegateOnLongClickListener = l;
-    }
+    public final void setOnLongClickListener(OnLongClickListener l) {}
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener l){
         onCheckedChangeListener = l;
@@ -914,26 +964,19 @@ public class SwitchButton extends View implements Checkable {
 
     private OnCheckedChangeListener onCheckedChangeListener;
 
-    private OnClickListener
-            delegateOnClickListener,
-            innerOnClickListener = new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toggle();
-                    if(delegateOnClickListener != null){
-                        delegateOnClickListener.onClick(v);
-                    }
-                }
-            };
+    /**
+     * 手势按下的时刻
+     */
+    private long touchDownTime;
 
-    private OnLongClickListener delegateOnLongClickListener,
-            innerOnLongClickListener = new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    pendingDragState();
-                    return true;
-                }
-            };
+    private Runnable postPendingDrag = new Runnable() {
+        @Override
+        public void run() {
+            if(!isInAnimating()){
+                pendingDragState();
+            }
+        }
+    };
 
     private ValueAnimator.AnimatorUpdateListener animatorUpdateListener
             = new ValueAnimator.AnimatorUpdateListener() {
@@ -941,22 +984,24 @@ public class SwitchButton extends View implements Checkable {
         public void onAnimationUpdate(ValueAnimator animation) {
             float value = (Float) animation.getAnimatedValue();
             switch (animateState) {
-                case ANIMATE_STATE_PENDING_RESET: {
-                }
                 case ANIMATE_STATE_PENDING_SETTLE: {
                 }
+                case ANIMATE_STATE_PENDING_RESET: {
+                }
                 case ANIMATE_STATE_PENDING_DRAG: {
-                    viewState.checkLineColor = (int) argbEvaluator.evaluate(
+                    viewState.checkedLineColor = (int) argbEvaluator.evaluate(
                             value,
-                            beforeState.checkLineColor,
-                            afterState.checkLineColor
+                            beforeState.checkedLineColor,
+                            afterState.checkedLineColor
                     );
 
                     viewState.radius = beforeState.radius
                             + (afterState.radius - beforeState.radius) * value;
 
-                    viewState.buttonX = beforeState.buttonX
-                            + (afterState.buttonX - beforeState.buttonX) * value;
+                    if(animateState != ANIMATE_STATE_PENDING_DRAG){
+                        viewState.buttonX = beforeState.buttonX
+                                + (afterState.buttonX - beforeState.buttonX) * value;
+                    }
 
                     viewState.checkStateColor = (int) argbEvaluator.evaluate(
                             value,
@@ -979,7 +1024,7 @@ public class SwitchButton extends View implements Checkable {
                     );
 
                     viewState.radius = fraction * viewRadius;
-                    viewState.checkLineColor = (int) argbEvaluator.evaluate(
+                    viewState.checkedLineColor = (int) argbEvaluator.evaluate(
                             fraction,
                             Color.TRANSPARENT,
                             checkLineColor
@@ -1011,7 +1056,7 @@ public class SwitchButton extends View implements Checkable {
                 }
                 case ANIMATE_STATE_PENDING_DRAG: {
                     animateState = ANIMATE_STATE_DRAGING;
-                    viewState.checkLineColor = Color.TRANSPARENT;
+                    viewState.checkedLineColor = Color.TRANSPARENT;
                     viewState.radius = viewRadius;
 
                     postInvalidate();
@@ -1050,5 +1095,36 @@ public class SwitchButton extends View implements Checkable {
         public void onAnimationRepeat(Animator animation) {
         }
     };
+
+
+    /*******************************************************/
+    /**
+     * 保存动画状态
+     * */
+    private static class ViewState {
+        /**
+         * 按钮x位置[buttonMinX-buttonMaxX]
+         */
+        float buttonX;
+        /**
+         * 状态背景颜色
+         */
+        int checkStateColor;
+        /**
+         * 选中线的颜色
+         */
+        int checkedLineColor;
+        /**
+         * 状态背景的半径
+         */
+        float radius;
+        ViewState(){}
+        private void copy(ViewState source){
+            this.buttonX = source.buttonX;
+            this.checkStateColor = source.checkStateColor;
+            this.checkedLineColor = source.checkedLineColor;
+            this.radius = source.radius;
+        }
+    }
 
 }
