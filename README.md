@@ -7,7 +7,7 @@ UseAge
 gradle:
 ```grovvy
 dependencies {
-    compile 'com.github.zcweng:switch-button:0.0.1-SNAPSHOT@aar'
+    compile 'com.github.zcweng:switch-button:0.0.1@aar'
 }
 ```
 
