@@ -1,6 +1,6 @@
 # SwitchButton
-        SwitchButton.具有与IOS开关控件相似样式和行为的Android控件<br>
-        <img src="21879.gif" style="max-width:212px;height:182px;" />
+    SwitchButton.具有与IOS开关控件相似样式和行为的Android控件<br>
+    <img src="21879.gif" style="max-width:212px;height:182px;" />
 
 使用方法
 -------
