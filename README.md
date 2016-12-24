@@ -1,5 +1,5 @@
 # SwitchButton
-SwitchButton.具有与IOS开关控件相似样式和行为的Android控件<br>
+SwitchButton.具有与IOS开关控件相似样式和行为的Android控件,minSdkVersion>=11<br>
 ![](21879.gif)
 
 使用方法
