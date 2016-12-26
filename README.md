@@ -5,7 +5,7 @@ issues welcome~<br>
 
 Features
 -------
--without third-part library depends<br>
+-depend without third-part library<br>
 -without raw files(pictures/drawables etc...), only one java and style.xml file<br>
 -drag switch supported<br>
 
