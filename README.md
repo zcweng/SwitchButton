@@ -1,11 +1,26 @@
 # SwitchButton
 SwitchButton.An *beautiful+lightweight+custom-style-easy* switch widget for Android,minSdkVersion >= 11<br>
+issues welcome~
 ![](21879.gif)
+
+Features
+-------
+-no third-part library depend
+-no raw files(pictures/drawables etc...), only one java and style.xml file
+-drag switch supported
+
 
 UseAge
 -------
 gradle:
 ```grovvy
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+...
+
 dependencies {
     compile 'com.github.zcweng:switch-button:0.0.1@aar'
 }
