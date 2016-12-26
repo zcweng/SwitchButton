@@ -1,13 +1,13 @@
 # SwitchButton
 SwitchButton.An *beautiful+lightweight+custom-style-easy* switch widget for Android,minSdkVersion >= 11<br>
-issues welcome~
-![](21879.gif)
+issues welcome~<br>
+![](21879.gif)<br>
 
 Features
 -------
--no third-part library depend
--no raw files(pictures/drawables etc...), only one java and style.xml file
--drag switch supported
+-no third-part library depend<br>
+-no raw files(pictures/drawables etc...), only one java and style.xml file<br>
+-drag switch supported<br>
 
 
 UseAge
