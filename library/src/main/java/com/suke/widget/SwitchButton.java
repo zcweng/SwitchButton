@@ -205,7 +205,6 @@ public class SwitchButton extends View implements Checkable {
                 || heightMode == MeasureSpec.AT_MOST){
             heightMeasureSpec = MeasureSpec.makeMeasureSpec(DEFAULT_HEIGHT, MeasureSpec.EXACTLY);
         }
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -463,7 +462,7 @@ public class SwitchButton extends View implements Checkable {
             postInvalidate();
             return;
         }
-        toggle();
+        toggle(enableEffect, false);
     }
 
     @Override
@@ -481,6 +480,10 @@ public class SwitchButton extends View implements Checkable {
      * @param animate
      */
     public void toggle(boolean animate) {
+        toggle(animate, true);
+    }
+
+    private void toggle(boolean animate, boolean broadcast) {
         if(!isEnabled()){return;}
 
         if(isEventBroadcast){
@@ -488,7 +491,9 @@ public class SwitchButton extends View implements Checkable {
         }
         if(!isUiInited){
             isChecked = !isChecked;
-            broadcastEvent();
+            if(broadcast){
+                broadcastEvent();
+            }
             return;
         }
 
@@ -504,7 +509,9 @@ public class SwitchButton extends View implements Checkable {
                 setUncheckViewState(viewState);
             }
             postInvalidate();
-            broadcastEvent();
+            if(broadcast){
+                broadcastEvent();
+            }
             return;
         }
 
@@ -534,6 +541,7 @@ public class SwitchButton extends View implements Checkable {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!isEnabled()){return false;}
         int actionMasked = event.getActionMasked();
 
         switch (actionMasked){
@@ -663,6 +671,10 @@ public class SwitchButton extends View implements Checkable {
                     0, 0,
                     0);
         }
+    }
+
+    public void setEnableEffect(boolean enable){
+        this.enableEffect = enable;
     }
 
     /**

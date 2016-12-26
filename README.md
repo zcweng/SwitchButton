@@ -5,8 +5,8 @@ issues welcome~<br>
 
 Features
 -------
--no third-part library depend<br>
--no raw files(pictures/drawables etc...), only one java and style.xml file<br>
+-without third-part library depends<br>
+-without raw files(pictures/drawables etc...), only one java and style.xml file<br>
 -drag switch supported<br>
 
 
@@ -22,7 +22,7 @@ repositories {
 ...
 
 dependencies {
-    compile 'com.github.zcweng:switch-button:0.0.1@aar'
+    compile 'com.github.zcweng:switch-button:0.0.2@aar'
 }
 ```
 
@@ -46,19 +46,21 @@ Activity.java:
 ```java
 com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
     findViewById(R.id.switch_button);
+
 switchButton.setChecked(true);
 switchButton.isChecked();
-switchButton.toggle();     //切换开关
-switchButton.toggle(false);//无动画切换
-//禁用按钮
-switchButton.setEnabled(false);
-
+switchButton.toggle();     //switch state
+switchButton.toggle(false);//switch without animation
+switchButton.setShadowEffect(true);//disable shadow effect
+switchButton.setEnabled(false);//disable button
+switchButton.setEnableEffect(false);//disable the switch animation
 switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-	@Override
-	public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-		//TODO do your job
-	}
+    @Override
+    public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+        //TODO do your job
+    }
 });
+
 
 ```
 

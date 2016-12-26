@@ -15,12 +15,11 @@ public class MainActivity extends Activity {
 
 		switchButton.setChecked(true);
 		switchButton.isChecked();
-		switchButton.toggle();     //切换开关
-		switchButton.toggle(false);//无动画切换
-		switchButton.setShadowEffect(true);//设置是否启用阴影效果
-		//禁用按钮
-		switchButton.setEnabled(false);
-
+		switchButton.toggle();     //switch state
+		switchButton.toggle(false);//switch without animation
+		switchButton.setShadowEffect(true);//disable shadow effect
+		switchButton.setEnabled(false);//disable button
+		switchButton.setEnableEffect(false);//disable the switch animation
 		switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(SwitchButton view, boolean isChecked) {
