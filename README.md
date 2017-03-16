@@ -22,7 +22,7 @@ repositories {
 ...
 
 dependencies {
-    compile 'com.github.zcweng:switch-button:0.0.2@aar'
+    compile 'com.github.zcweng:switch-button:0.0.3@aar'
 }
 ```
 
