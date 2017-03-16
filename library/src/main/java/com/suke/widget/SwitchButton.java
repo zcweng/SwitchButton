@@ -64,8 +64,7 @@ public class SwitchButton extends View implements Checkable {
 
     @Override
     public final void setPadding(int left, int top, int right, int bottom) {
-        //do nothing
-        throw new RuntimeException("illegal call : method [setPadding]");
+        super.setPadding(0, 0, 0, 0);
     }
 
     /**
@@ -186,7 +185,7 @@ public class SwitchButton extends View implements Checkable {
         valueAnimator.addListener(animatorListener);
 
         super.setClickable(true);
-        super.setPadding(0,0,0,0);
+        this.setPadding(0, 0, 0, 0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
         }
