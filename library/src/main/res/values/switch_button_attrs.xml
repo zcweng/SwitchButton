@@ -21,5 +21,9 @@
         <attr name="sb_show_indicator" format="reference|boolean"/>
         <attr name="sb_background" format="reference|color"/>
         <attr name="sb_enable_effect" format="reference|boolean"/>
+    
+        <attr name="sb_checkedbutton_color" format="reference|color"/>
+        <attr name="sb_uncheckbutton_color" format="reference|color"/>
+        
     </declare-styleable>
 </resources>
