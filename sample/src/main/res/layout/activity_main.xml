@@ -43,6 +43,8 @@
         app:sb_checkline_color="#a5dc88"
         app:sb_checked_color="#A36F95"
         app:sb_uncheckcircle_color="#A36F95"
+        app:sb_uncheckbutton_color="#fdc951"
+        app:sb_checkedbutton_color="#61d74f"
         />
 
     <com.suke.widget.SwitchButton

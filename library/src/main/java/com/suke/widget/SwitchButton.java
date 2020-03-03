@@ -135,6 +135,14 @@ public class SwitchButton extends View implements Checkable {
         int buttonColor = optColor(typedArray,
                 R.styleable.SwitchButton_sb_button_color,
                 Color.WHITE);//Color.WHITE;
+        
+        uncheckButtonColor = optColor(typedArray,
+                R.styleable.SwitchButton_sb_uncheckbutton_color,
+                buttonColor);
+    
+        checkedButtonColor = optColor(typedArray,
+                R.styleable.SwitchButton_sb_checkedbutton_color,
+                buttonColor);
 
         int effectDuration = optInt(typedArray,
                 R.styleable.SwitchButton_sb_effect_duration,
@@ -251,6 +259,7 @@ public class SwitchButton extends View implements Checkable {
         viewState.checkStateColor = uncheckColor;
         viewState.checkedLineColor = Color.TRANSPARENT;
         viewState.buttonX = buttonMinX;
+        buttonPaint.setColor(uncheckButtonColor);
     }
 
     /**
@@ -261,6 +270,7 @@ public class SwitchButton extends View implements Checkable {
         viewState.checkStateColor = checkedColor;
         viewState.checkedLineColor = checkLineColor;
         viewState.buttonX = buttonMaxX;
+        buttonPaint.setColor(checkedButtonColor);
     }
 
     @Override
@@ -903,8 +913,16 @@ public class SwitchButton extends View implements Checkable {
      *打开指示线位移Y
      */
     private float checkedLineOffsetY;
-
-
+    /**
+     * Color for button when it's uncheck
+     */
+    private int uncheckButtonColor;
+    /**
+     * Color for button when it's check
+     */
+    private int checkedButtonColor;
+    
+    
     /**
      * 按钮最左边
      */
