@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Sample</string>
+
+    <string name="text_1">disable style + programing settings</string>
+    <string name="text_2">smooth swipe with indicator</string>
+    <string name="text_3">smooth swipe without indicator</string>
+    <string name="text_4">changed background color</string>
+    <string name="text_5">changed all colors style</string>
+    <string name="text_6">style without smooth swipe</string>
 </resources>
