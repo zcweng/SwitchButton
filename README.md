@@ -42,9 +42,9 @@ layout.xml:
 </LinearLayout>
 ```
 
-Activity.java:
+Java:
 ```java
-com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
+SwitchButton switchButton = (com.suke.widget.SwitchButton)
     findViewById(R.id.switch_button);
 
 switchButton.setChecked(true);
@@ -60,6 +60,26 @@ switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener
         //TODO do your job
     }
 });
+
+
+```
+
+Kotlin:
+```kotlin
+val switchButton = findViewById<View>(R.id.switch_button) as SwitchButton
+
+switchButton.isChecked = true
+switchButton.isChecked
+switchButton.toggle() //switch state
+switchButton.toggle(false) //switch without animation
+switchButton.setShadowEffect(true) //disable shadow effect
+switchButton.isEnabled = false //disable button
+switchButton.setEnableEffect(false) //disable the switch animation
+switchButton.setOnCheckedChangeListener(object : SwitchButton.OnCheckedChangeListener {
+    override fun onCheckedChanged(view: SwitchButton?, isChecked: Boolean) {
+        //TODO do your job
+    }
+})
 
 
 ```

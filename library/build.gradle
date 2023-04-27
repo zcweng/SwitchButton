@@ -1,17 +1,17 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: '../gradle-mvn-push.gradle'
 
 def VERSION_CODE = 3
 def VERSION_NAME = "0.0.3"
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 23
-        versionCode VERSION_CODE
-        versionName VERSION_NAME
+        minSdkVersion 14
+        targetSdkVersion 33
     }
 
     lintOptions {
@@ -19,4 +19,8 @@ android {
     }
 }
 
-apply from: '../gradle-mvn-push.gradle'
+
+dependencies {
+    implementation "androidx.core:core-ktx:1.6.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}

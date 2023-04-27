@@ -1,18 +1,27 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.6.10'
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 allprojects {
     repositories {
         mavenCentral()
-        jcenter()
+        google()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
 }
 
