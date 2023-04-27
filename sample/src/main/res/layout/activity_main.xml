@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_1"
-        android:layout_marginHorizontal="16dp"
-        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@+id/switch_button"
         app:layout_constraintBottom_toBottomOf="@+id/switch_button"
         app:layout_constraintStart_toEndOf="@+id/switch_button"/>
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text_2"
         android:layout_marginHorizontal="16dp"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@+id/switch_button_enable"
         app:layout_constraintBottom_toBottomOf="@+id/switch_button_enable"
         app:layout_constraintStart_toEndOf="@+id/switch_button_enable"/>
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text_3"
         android:layout_marginHorizontal="16dp"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@+id/switch_button_without_indication"
         app:layout_constraintBottom_toBottomOf="@+id/switch_button_without_indication"
         app:layout_constraintStart_toEndOf="@+id/switch_button_without_indication"/>
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text_4"
         android:layout_marginHorizontal="16dp"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@+id/switch_button_changed_color_background"
         app:layout_constraintBottom_toBottomOf="@+id/switch_button_changed_color_background"
         app:layout_constraintStart_toEndOf="@+id/switch_button_changed_color_background"/>
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text_5"
         android:layout_marginHorizontal="16dp"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@+id/switch_button_changed_color_all"
         app:layout_constraintBottom_toBottomOf="@+id/switch_button_changed_color_all"
         app:layout_constraintStart_toEndOf="@+id/switch_button_changed_color_all"/>
@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text_6"
         android:layout_marginHorizontal="16dp"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@+id/switch_button_without_swipe"
         app:layout_constraintBottom_toBottomOf="@+id/switch_button_without_swipe"
         app:layout_constraintStart_toEndOf="@+id/switch_button_without_swipe"/>

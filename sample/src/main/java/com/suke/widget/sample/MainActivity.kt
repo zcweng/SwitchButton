@@ -11,7 +11,7 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         val switchButton = findViewById<View>(R.id.switch_button) as SwitchButton
 
-        switchButton.isChecked = true
+        //switchButton.isChecked = true
         switchButton.toggle() //switch state
         switchButton.toggle(false) //switch without animation
         switchButton.setShadowEffect(true) //disable shadow effect
