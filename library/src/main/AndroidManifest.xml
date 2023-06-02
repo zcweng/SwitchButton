@@ -3,8 +3,8 @@
     android:versionCode="200"
     android:versionName="2.0" >
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
+<!--    <uses-sdk-->
+<!--        android:minSdkVersion="8"-->
+<!--        android:targetSdkVersion="21" />-->
 
 </manifest>

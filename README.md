@@ -1,5 +1,5 @@
 # SwitchButton
-SwitchButton.An *beautiful+lightweight+custom-style-easy* switch widget for Android,minSdkVersion >= 11<br>
+SwitchButton.An *beautiful+lightweight+custom-style-easy* switch widget for Android,minSdkVersion >= 14<br>
 issues welcome~<br>
 ![](21879.gif)<br>
 
@@ -22,7 +22,7 @@ repositories {
 ...
 
 dependencies {
-    compile 'com.github.zcweng:switch-button:0.0.3@aar'
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
 }
 ```
 
@@ -42,9 +42,9 @@ layout.xml:
 </LinearLayout>
 ```
 
-Activity.java:
+Java:
 ```java
-com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
+SwitchButton switchButton = (com.suke.widget.SwitchButton)
     findViewById(R.id.switch_button);
 
 switchButton.setChecked(true);
@@ -60,6 +60,26 @@ switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener
         //TODO do your job
     }
 });
+
+
+```
+
+Kotlin:
+```kotlin
+val switchButton = findViewById<View>(R.id.switch_button) as SwitchButton
+
+switchButton.isChecked = true
+switchButton.isChecked
+switchButton.toggle() //switch state
+switchButton.toggle(false) //switch without animation
+switchButton.setShadowEffect(true) //disable shadow effect
+switchButton.isEnabled = false //disable button
+switchButton.setEnableEffect(false) //disable the switch animation
+switchButton.setOnCheckedChangeListener(object : SwitchButton.OnCheckedChangeListener {
+    override fun onCheckedChanged(view: SwitchButton?, isChecked: Boolean) {
+        //TODO do your job
+    }
+})
 
 
 ```
@@ -91,7 +111,6 @@ ScreenShot
 -------
 <a href="https://github.com/zcweng/SwitchButton/blob/master/sample/sample-debug.apk">Sample Apk:</a><br>
 ![](http://qr.api.cli.im/qr?data=https%253A%252F%252Fgithub.com%252Fzcweng%252FSwitchButton%252Fblob%252Fmaster%252Fsample%252Fsample-debug.apk&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=8144f9f150d38d7d364c923d0b9c87cf)<br>
-![](device-capture.png)
 
 
 License

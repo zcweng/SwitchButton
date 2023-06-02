@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,33 +10,84 @@
         android:id="@+id/switch_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.suke.widget.SwitchButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:sb_checked="true"/>
-
+        android:text="@string/text_1"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@+id/switch_button"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_button"
+        app:layout_constraintStart_toEndOf="@+id/switch_button"/>
 
     <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button_enable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
+        app:sb_checked="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_button"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_2"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@+id/switch_button_enable"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_button_enable"
+        app:layout_constraintStart_toEndOf="@+id/switch_button_enable"/>
+
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button_without_indication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:sb_show_indicator="false"
-        app:sb_checked="true"/>
+        app:sb_checked="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_button_enable"/>
 
-    <com.suke.widget.SwitchButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:text="@string/text_3"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@+id/switch_button_without_indication"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_button_without_indication"
+        app:layout_constraintStart_toEndOf="@+id/switch_button_without_indication"/>
+
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button_changed_color_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:sb_checked_color="#fdc951"
-        app:sb_checked="true"/>
+        app:sb_checked="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_button_without_indication"/>
 
-    <com.suke.widget.SwitchButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:text="@string/text_4"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@+id/switch_button_changed_color_background"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_button_changed_color_background"
+        app:layout_constraintStart_toEndOf="@+id/switch_button_changed_color_background"/>
+
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button_changed_color_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:sb_button_color="#db99c7"
         app:sb_shadow_color="#A36F95"
         app:sb_background="#FFF"
@@ -45,12 +96,36 @@
         app:sb_uncheckcircle_color="#A36F95"
         app:sb_uncheckbutton_color="#fdc951"
         app:sb_checkedbutton_color="#61d74f"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_button_changed_color_background"/>
 
-    <com.suke.widget.SwitchButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:sb_enable_effect="false"/>
+        android:text="@string/text_5"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@+id/switch_button_changed_color_all"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_button_changed_color_all"
+        app:layout_constraintStart_toEndOf="@+id/switch_button_changed_color_all"/>
 
-</LinearLayout>
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button_without_swipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:sb_enable_effect="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_button_changed_color_all"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_6"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="@+id/switch_button_without_swipe"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_button_without_swipe"
+        app:layout_constraintStart_toEndOf="@+id/switch_button_without_swipe"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
